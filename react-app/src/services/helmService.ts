@@ -7,7 +7,8 @@ export class HelmService {
   static async searchCharts(searchTerm: string = ''): Promise<HelmChart[]> {
     try {
       // Fetch the chart data from the generated JSON file
-      const response = await fetch('/data/charts.json');
+      // Using relative path to work with GitHub Pages deployment
+      const response = await fetch('./data/charts.json');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -29,7 +30,8 @@ export class HelmService {
   static async getChartByName(repo: string, name: string): Promise<HelmChart | null> {
     try {
       // Fetch the chart data from the generated JSON file
-      const response = await fetch('/data/charts.json');
+      // Using relative path to work with GitHub Pages deployment
+      const response = await fetch('./data/charts.json');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
