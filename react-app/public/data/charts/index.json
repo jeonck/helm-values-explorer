@@ -9,5 +9,6 @@
   "mongodb.json",
   "postgresql.json",
   "prometheus.json",
-  "airflow.json"
+  "airflow.json",
+  "minio.json"
 ]
