@@ -1,0 +1,10 @@
+{
+  "name": "nginx-ingress",
+  "repo": "ingress-nginx",
+  "description": "Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer",
+  "version": "4.10.1",
+  "appVersion": "1.10.1",
+  "values": "## nginx configuration\n## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml\ncontroller:\n  image:\n    registry: k8s.gcr.io\n    image: ingress-nginx/controller\n    tag: \"v1.10.1\"\n  replicaCount: 1\n  service:\n    type: LoadBalancer\n    port: 80\n    targetPorts:\n      http: 80\n      https: 443\n  resources:\n    limits:\n      cpu: 100m\n      memory: 90Mi\n    requests:\n      cpu: 100m\n      memory: 90Mi\n\ndefaultBackend:\n  enabled: false\n\nprometheus:\n  enabled: false",
+  "url": "https://github.com/kubernetes/ingress-nginx",
+  "createdAt": "2025-10-03"
+}

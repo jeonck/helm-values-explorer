@@ -21,14 +21,16 @@ const REPOSITORIES = {
 };
 
 const CHARTS_TO_FETCH = [
+  { name: 'fluentd', repo: 'fluent' },
+  { name: 'opensearch', repo: 'opensearch' },
+  { name: 'pinot', repo: 'apache' },
+  { name: 'kafka', repo: 'bitnami' },
+  { name: 'argo-cd', repo: 'argo' },
+  { name: 'nginx-ingress', repo: 'ingress-nginx' },
   { name: 'redis', repo: 'bitnami' },
   { name: 'mongodb', repo: 'bitnami' },
   { name: 'postgresql', repo: 'bitnami' },
-  { name: 'nginx-ingress', repo: 'ingress-nginx', repoName: 'ingress-nginx' },
-  { name: 'prometheus', repo: 'prometheus-community' },
-  { name: 'grafana', repo: 'grafana' },
-  { name: 'cert-manager', repo: 'jetstack' },
-  { name: 'argo-cd', repo: 'argo' }
+  { name: 'prometheus', repo: 'prometheus-community' }
 ];
 
 async function fetchIndexYaml(repoName, repoUrl) {

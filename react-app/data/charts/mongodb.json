@@ -1,0 +1,10 @@
+{
+  "name": "mongodb",
+  "repo": "bitnami",
+  "description": "NoSQL document-oriented database that stores JSON-like documents with dynamic schemas, simplifying the integration of data in content-driven applications.",
+  "version": "15.1.5",
+  "appVersion": "7.0.12",
+  "values": "## @section Global parameters\n## Global Docker image parameters\n## Please, note that this will override the image parameters, including dependencies, configured to use the global value\n## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass\n##\nglobal:\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n  mongodb:\n    auth:\n      rootPassword: \"\"\n      passwords: []\n      usernames: []\n      database: \"\"\n      replicaSetKey: \"\"\n    service:\n      ports:\n        mongodb: 27017\n      nodePorts:\n        mongodb: \"\"\n    architecture: standalone\n\n## @section Common parameters\n##\n## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)\nnameOverride: \"\"\n\n## @param fullnameOverride String to fully override common.names.fullname template\nfullnameOverride: \"\"\n\n## @param clusterDomain Default Kubernetes cluster domain\nclusterDomain: cluster.local\n\n## @param extraDeploy Array of extra objects to deploy with the release\nextraDeploy: []\n\n## @param commonLabels Labels to add to all deployed objects\ncommonLabels: {}\n\n## @param commonAnnotations Annotations to add to all deployed objects\ncommonAnnotations: {}\n\n## Enable diagnostic mode in the deployment\ndiagnosticMode:\n  enabled: false\n  command:\n    - sleep\n  args:\n    - infinity",
+  "url": "https://github.com/bitnami/charts/tree/main/bitnami/mongodb",
+  "createdAt": "2025-10-03"
+}

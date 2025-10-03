@@ -1,3 +1,12 @@
 [
-  "fluentd.json"
+  "fluentd.json",
+  "opensearch.json",
+  "pinot.json",
+  "kafka.json",
+  "argo-cd.json",
+  "nginx-ingress.json",
+  "redis.json",
+  "mongodb.json",
+  "postgresql.json",
+  "prometheus.json"
 ]

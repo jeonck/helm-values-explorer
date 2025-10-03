@@ -1,0 +1,10 @@
+{
+  "name": "postgresql",
+  "repo": "bitnami",
+  "description": "Highly available PostgreSQL cluster. Supports both standalone and replicated deployments.",
+  "version": "15.5.12",
+  "appVersion": "16.3.0",
+  "values": "## @section Global parameters\n## Global Docker image parameters\n## Please, note that this will override the image parameters, including dependencies, configured to use the global value\n## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass\n##\nglobal:\n  postgresql:\n    auth:\n      postgresPassword: \"\"\n      database: \"\"\n    service:\n      ports:\n        postgresql: 5432\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n\n## @section Common parameters\n##\n## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)\nnameOverride: \"\"\n\n## @param fullnameOverride String to fully override common.names.fullname template\nfullnameOverride: \"\"\n\n## @param clusterDomain Kubernetes cluster domain name\nclusterDomain: cluster.local\n\n## @param extraDeploy Array of extra objects to deploy with the release\nextraDeploy: []\n\n## Enable diagnostic mode in the deployment\ndiagnosticMode:\n  enabled: false\n  command:\n    - sleep\n  args:\n    - infinity",
+  "url": "https://github.com/bitnami/charts/tree/main/bitnami/postgresql",
+  "createdAt": "2025-10-03"
+}

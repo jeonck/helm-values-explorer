@@ -1,0 +1,10 @@
+{
+  "name": "prometheus",
+  "repo": "prometheus-community",
+  "description": "Prometheus is a monitoring system and time series database.",
+  "version": "25.31.0",
+  "appVersion": "2.53.0",
+  "values": "## Configuration for the main Prometheus server\n##\nserver:\n  enabled: true\n  name: server\n  image:\n    registry: quay.io\n    repository: prometheus/prometheus\n    tag: \"v2.53.0\"\n    pullPolicy: IfNotPresent\n\n  ## Prometheus server ConfigMap entries\n  ##\n  configMap:\n    enabled: true\n\n  ## Configuration for the server's persistent volume\n  ##\n  persistentVolume:\n    enabled: true\n    size: 8Gi\n    storageClass: \"\"\n    accessModes:\n      - ReadWriteOnce\n\n  ## Resources for the Prometheus server\n  ##\n  resources:\n    limits:\n      cpu: 500m\n      memory: 512Mi\n    requests:\n      cpu: 500m\n      memory: 512Mi",
+  "url": "https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus",
+  "createdAt": "2025-10-03"
+}
