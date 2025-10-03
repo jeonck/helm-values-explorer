@@ -5,6 +5,7 @@ import { HelmService } from '../services/helmService';
 const categories: HelmChartCategory[] = [
   { id: 'all', name: 'All Charts', description: 'All available Helm charts' },
   { id: 'databases', name: 'Databases', description: 'Database Helm charts' },
+  { id: 'messaging', name: 'Messaging & Streaming', description: 'Message brokers and streaming platforms' },
   { id: 'monitoring', name: 'Monitoring', description: 'Monitoring and observability tools' },
   { id: 'ingress', name: 'Ingress Controllers', description: 'Ingress and load balancing solutions' },
   { id: 'gitops', name: 'GitOps Tools', description: 'GitOps and continuous delivery tools' },
@@ -45,7 +46,8 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
     const matchesSearch = chart.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           chart.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || 
-                           (selectedCategory === 'databases' && ['redis', 'mongodb', 'postgresql', 'kafka'].includes(chart.name)) ||
+                           (selectedCategory === 'databases' && ['redis', 'mongodb', 'postgresql'].includes(chart.name)) ||
+                           (selectedCategory === 'messaging' && ['kafka'].includes(chart.name)) ||
                            (selectedCategory === 'monitoring' && ['prometheus'].includes(chart.name)) ||
                            (selectedCategory === 'ingress' && ['nginx-ingress'].includes(chart.name)) ||
                            (selectedCategory === 'gitops' && (chart.name.toLowerCase().includes('argo') || chart.name.toLowerCase().includes('argocd')));
