@@ -150,7 +150,12 @@ helm repo update
 helm install my-release ${chart.repo}/${chart.name}
 
 # Install with custom values
-helm install my-release -f values.yaml ${chart.repo}/${chart.name}`}
+helm install my-release -f values.yaml ${chart.repo}/${chart.name}
+
+# Or download and inspect the chart first
+helm show chart ${chart.repo}/${chart.name}
+helm pull ${chart.repo}/${chart.name} --untar
+# This creates a directory with the chart files which you can inspect and modify`}
               </code>
             </pre>
           </div>
