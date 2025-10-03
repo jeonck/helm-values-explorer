@@ -55,7 +55,7 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
                            (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name))) ||
                            (selectedCategory === 'ingress' && (['nginx-ingress'].includes(chart.name))) ||
                            (selectedCategory === 'gitops' && (['argo-cd'].includes(chart.name))) ||
-                           (selectedCategory === 'storage' && (['minio'].includes(chart.name)));
+                           (selectedCategory === 'storage' && (['minio', 'rook-ceph'].includes(chart.name)));
                            
     return matchesSearch && matchesCategory;
   });

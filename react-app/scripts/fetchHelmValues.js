@@ -34,7 +34,8 @@ const CHARTS_TO_FETCH = [
   { name: 'airflow', repo: 'apache' },
   { name: 'minio', repo: 'minio' },
   { name: 'superset', repo: 'apache' },
-  { name: 'opensearch-dashboards', repo: 'opensearch' }
+  { name: 'opensearch-dashboards', repo: 'opensearch' },
+  { name: 'rook-ceph', repo: 'rook' }
 ];
 
 async function fetchIndexYaml(repoName, repoUrl) {

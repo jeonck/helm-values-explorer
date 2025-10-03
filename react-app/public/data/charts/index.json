@@ -12,5 +12,6 @@
   "airflow.json",
   "minio.json",
   "superset.json",
-  "opensearch-dashboards.json"
+  "opensearch-dashboards.json",
+  "rook-ceph.json"
 ]
