@@ -1,0 +1,52 @@
+[
+  {
+    "name": "nginx-ingress",
+    "repo": "ingress-nginx",
+    "description": "Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer",
+    "version": "4.10.1",
+    "appVersion": "1.10.1",
+    "values": "## nginx configuration\n## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml\ncontroller:\n  image:\n    registry: k8s.gcr.io\n    image: ingress-nginx/controller\n    tag: \"v1.10.1\"\n  replicaCount: 1\n  service:\n    type: LoadBalancer\n    port: 80\n    targetPorts:\n      http: 80\n      https: 443\n  resources:\n    limits:\n      cpu: 100m\n      memory: 90Mi\n    requests:\n      cpu: 100m\n      memory: 90Mi\n\ndefaultBackend:\n  enabled: false\n\nprometheus:\n  enabled: false",
+    "url": "https://github.com/kubernetes/ingress-nginx",
+    "createdAt": "2025-10-03"
+  },
+  {
+    "name": "redis",
+    "repo": "bitnami",
+    "description": "Open source, advanced key-value store. It is often referred to as a data structure server since keys can contain strings, hashes, lists, sets and sorted sets.",
+    "version": "19.6.1",
+    "appVersion": "7.2.5",
+    "values": "## @section Global parameters\n## Global Docker image parameters\n## Please, note that this will override the image parameters, including dependencies, configured to use the global value\n## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass\n##\nglobal:\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n\n## @section Common parameters\n##\n## @param nameOverride String to partially override common.names.fullname\nnameOverride: \"\"\n## @param fullnameOverride String to fully override common.names.fullname\nfullnameOverride: \"\"\n## @param clusterDomain Default Kubernetes cluster domain\nclusterDomain: cluster.local\n## @param extraDeploy Array of extra objects to deploy with the release\nextraDeploy: []\n\n## Enable diagnostic mode in the deployment\ndiagnosticMode:\n  enabled: false\n  command:\n    - sleep\n  args:\n    - infinity\n\n## Bitnami Redis image version\n## ref: https://hub.docker.com/r/bitnami/redis/tags/\n## @param image.registry Redis image registry\n## @param image.repository Redis image repository\n## @param image.tag Redis image tag (immutable tags are recommended)\n## @param image.digest Redis image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag\n## @param image.pullPolicy Redis image pull policy\n## @param image.pullSecrets Redis image pull secrets\nimage:\n  registry: docker.io\n  repository: bitnami/redis\n  tag: 7.2.5-debian-12-r0\n  digest: \"\"\n  pullPolicy: IfNotPresent\n  pullSecrets: []",
+    "url": "https://github.com/bitnami/charts/tree/main/bitnami/redis",
+    "createdAt": "2025-10-03"
+  },
+  {
+    "name": "mongodb",
+    "repo": "bitnami",
+    "description": "NoSQL document-oriented database that stores JSON-like documents with dynamic schemas, simplifying the integration of data in content-driven applications.",
+    "version": "15.1.5",
+    "appVersion": "7.0.12",
+    "values": "## @section Global parameters\n## Global Docker image parameters\n## Please, note that this will override the image parameters, including dependencies, configured to use the global value\n## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass\n##\nglobal:\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n  mongodb:\n    auth:\n      rootPassword: \"\"\n      passwords: []\n      usernames: []\n      database: \"\"\n      replicaSetKey: \"\"\n    service:\n      ports:\n        mongodb: 27017\n      nodePorts:\n        mongodb: \"\"\n    architecture: standalone\n\n## @section Common parameters\n##\n## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)\nnameOverride: \"\"\n\n## @param fullnameOverride String to fully override common.names.fullname template\nfullnameOverride: \"\"\n\n## @param clusterDomain Default Kubernetes cluster domain\nclusterDomain: cluster.local\n\n## @param extraDeploy Array of extra objects to deploy with the release\nextraDeploy: []\n\n## @param commonLabels Labels to add to all deployed objects\ncommonLabels: {}\n\n## @param commonAnnotations Annotations to add to all deployed objects\ncommonAnnotations: {}\n\n## Enable diagnostic mode in the deployment\ndiagnosticMode:\n  enabled: false\n  command:\n    - sleep\n  args:\n    - infinity",
+    "url": "https://github.com/bitnami/charts/tree/main/bitnami/mongodb",
+    "createdAt": "2025-10-03"
+  },
+  {
+    "name": "postgresql",
+    "repo": "bitnami",
+    "description": "Highly available PostgreSQL cluster. Supports both standalone and replicated deployments.",
+    "version": "15.5.12",
+    "appVersion": "16.3.0",
+    "values": "## @section Global parameters\n## Global Docker image parameters\n## Please, note that this will override the image parameters, including dependencies, configured to use the global value\n## Current available global Docker image parameters: imageRegistry, imagePullSecrets and storageClass\n##\nglobal:\n  postgresql:\n    auth:\n      postgresPassword: \"\"\n      database: \"\"\n    service:\n      ports:\n        postgresql: 5432\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n\n## @section Common parameters\n##\n## @param nameOverride String to partially override common.names.fullname template (will maintain the release name)\nnameOverride: \"\"\n\n## @param fullnameOverride String to fully override common.names.fullname template\nfullnameOverride: \"\"\n\n## @param clusterDomain Kubernetes cluster domain name\nclusterDomain: cluster.local\n\n## @param extraDeploy Array of extra objects to deploy with the release\nextraDeploy: []\n\n## Enable diagnostic mode in the deployment\ndiagnosticMode:\n  enabled: false\n  command:\n    - sleep\n  args:\n    - infinity",
+    "url": "https://github.com/bitnami/charts/tree/main/bitnami/postgresql",
+    "createdAt": "2025-10-03"
+  },
+  {
+    "name": "prometheus",
+    "repo": "prometheus-community",
+    "description": "Prometheus is a monitoring system and time series database.",
+    "version": "25.31.0",
+    "appVersion": "2.53.0",
+    "values": "## Configuration for the main Prometheus server\n##\nserver:\n  enabled: true\n  name: server\n  image:\n    registry: quay.io\n    repository: prometheus/prometheus\n    tag: \"v2.53.0\"\n    pullPolicy: IfNotPresent\n\n  ## Prometheus server ConfigMap entries\n  ##\n  configMap:\n    enabled: true\n\n  ## Configuration for the server's persistent volume\n  ##\n  persistentVolume:\n    enabled: true\n    size: 8Gi\n    storageClass: \"\"\n    accessModes:\n      - ReadWriteOnce\n\n  ## Resources for the Prometheus server\n  ##\n  resources:\n    limits:\n      cpu: 500m\n      memory: 512Mi\n    requests:\n      cpu: 500m\n      memory: 512Mi",
+    "url": "https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus",
+    "createdAt": "2025-10-03"
+  }
+]
