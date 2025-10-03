@@ -1,5 +1,15 @@
 [
   {
+    "name": "opensearch",
+    "repo": "opensearch",
+    "description": "OpenSearch is a distributed search and analytics engine based on Apache Lucene. It provides a RESTful multi-tenant database with a HTTP web interface and schema-free JSON documents.",
+    "version": "2.23.1",
+    "appVersion": "2.16.0",
+    "values": "# OpenSearch configuration\n# Ref: https://github.com/opensearch-project/helm-charts/blob/main/charts/opensearch/values.yaml\n\n## Global settings\nglobal:\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n\n## OpenSearch settings\nopensearch:\n  ## OpenSearch image settings\n  image:\n    repository: opensearchproject/opensearch\n    tag: \"2.16.0\"\n    pullPolicy: IfNotPresent\n  \n  ## Number of OpenSearch nodes\n  replicas: 2\n  \n  ## JVM settings\n  jvmOptions: \"-Xmx512m -Xms512m\"\n  \n  ## Resources settings\n  resources:\n    limits:\n      cpu: 1000m\n      memory: 1Gi\n    requests:\n      cpu: 500m\n      memory: 512Mi\n  \n  ## Persistence settings\n  persistence:\n    enabled: true\n    size: 30Gi\n    storageClass: \"\"\n  \n  ## OpenSearch cluster settings\n  cluster:\n    name: opensearch-cluster\n    masterNodes: 2\n    ingestNodes: 2\n    dataNodes: 2\n\n## OpenSearch Dashboards settings\ndashboards:\n  enabled: true\n  \n  image:\n    repository: opensearchproject/opensearch-dashboards\n    tag: \"2.16.0\"\n    pullPolicy: IfNotPresent\n  \n  replicas: 1\n  \n  resources:\n    limits:\n      cpu: 500m\n      memory: 512Mi\n    requests:\n      cpu: 250m\n      memory: 256Mi\n  \n  service:\n    type: ClusterIP\n    port: 5601\n\n## Security settings\nsecurity:\n  enabled: false\n  \n  # Admin password secret (if security is enabled)\n  adminSecret: \"\"\n\n## Networking settings\nnetworking:\n  httpPort: 9200\n  transportPort: 9300\n\n## Metrics and monitoring\nmetrics:\n  enabled: false\n  prometheus:\n    serviceMonitor:\n      enabled: false\n",
+    "url": "https://github.com/opensearch-project/helm-charts/tree/main/charts/opensearch",
+    "createdAt": "2025-10-03"
+  },
+  {
     "name": "pinot",
     "repo": "apache",
     "description": "Apache Pinot is a real-time distributed OLAP datastore designed to answer OLAP queries with low latency.",
