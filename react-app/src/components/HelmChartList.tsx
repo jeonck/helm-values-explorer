@@ -51,7 +51,7 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
                            (selectedCategory === 'databases' && (['redis', 'mongodb', 'postgresql'].includes(chart.name))) ||
                            (selectedCategory === 'messaging' && (['kafka'].includes(chart.name))) ||
                            (selectedCategory === 'olap' && (['opensearch', 'pinot'].includes(chart.name))) ||
-                           (selectedCategory === 'analytics' && (['airflow', 'superset'].includes(chart.name))) ||
+                           (selectedCategory === 'analytics' && (['airflow', 'superset', 'opensearch-dashboards'].includes(chart.name))) ||
                            (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name))) ||
                            (selectedCategory === 'ingress' && (['nginx-ingress'].includes(chart.name))) ||
                            (selectedCategory === 'gitops' && (['argo-cd'].includes(chart.name))) ||

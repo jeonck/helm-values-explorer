@@ -33,7 +33,8 @@ const CHARTS_TO_FETCH = [
   { name: 'prometheus', repo: 'prometheus-community' },
   { name: 'airflow', repo: 'apache' },
   { name: 'minio', repo: 'minio' },
-  { name: 'superset', repo: 'apache' }
+  { name: 'superset', repo: 'apache' },
+  { name: 'opensearch-dashboards', repo: 'opensearch' }
 ];
 
 async function fetchIndexYaml(repoName, repoUrl) {

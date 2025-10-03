@@ -11,5 +11,6 @@
   "prometheus.json",
   "airflow.json",
   "minio.json",
-  "superset.json"
+  "superset.json",
+  "opensearch-dashboards.json"
 ]
