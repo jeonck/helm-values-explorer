@@ -47,7 +47,7 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
                           chart.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || 
                            (selectedCategory === 'databases' && ['redis', 'mongodb', 'postgresql'].includes(chart.name)) ||
-                           (selectedCategory === 'messaging' && ['kafka'].includes(chart.name)) ||
+                           (selectedCategory === 'messaging' && (['kafka', 'pinot'].includes(chart.name) || chart.name.toLowerCase().includes('kafka') || chart.name.toLowerCase().includes('pinot'))) ||
                            (selectedCategory === 'monitoring' && ['prometheus'].includes(chart.name)) ||
                            (selectedCategory === 'ingress' && ['nginx-ingress'].includes(chart.name)) ||
                            (selectedCategory === 'gitops' && (chart.name.toLowerCase().includes('argo') || chart.name.toLowerCase().includes('argocd')));
