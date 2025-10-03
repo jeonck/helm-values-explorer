@@ -6,11 +6,11 @@ const categories: HelmChartCategory[] = [
   { id: 'all', name: 'All Charts', description: 'All available Helm charts' },
   { id: 'databases', name: 'Databases', description: 'Database Helm charts' },
   { id: 'messaging', name: 'Messaging & Streaming', description: 'Message brokers and streaming platforms' },
-  { id: 'analytics', name: 'Analytics & OLAP', description: 'Analytics and OLAP datastore solutions' },
+  { id: 'analytics', name: 'Analytics & BI', description: 'Analytics and business intelligence solutions' },
   { id: 'monitoring', name: 'Monitoring', description: 'Monitoring and observability tools' },
   { id: 'ingress', name: 'Ingress Controllers', description: 'Ingress and load balancing solutions' },
   { id: 'gitops', name: 'GitOps Tools', description: 'GitOps and continuous delivery tools' },
-  { id: 'security', name: 'Security', description: 'Security-related solutions' },
+  { id: 'storage', name: 'Storage', description: 'Object storage and file system solutions' },
 ];
 
 interface HelmChartListProps {
@@ -47,12 +47,13 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
     const matchesSearch = chart.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
                           chart.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || 
-                           (selectedCategory === 'databases' && (['redis', 'mongodb', 'postgresql', 'opensearch'].includes(chart.name) || chart.name.toLowerCase().includes('opensearch'))) ||
-                           (selectedCategory === 'messaging' && (['kafka'].includes(chart.name) || chart.name.toLowerCase().includes('kafka'))) ||
-                           (selectedCategory === 'analytics' && (['pinot'].includes(chart.name) || chart.name.toLowerCase().includes('pinot'))) ||
-                           (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name) || chart.name.toLowerCase().includes('fluentd'))) ||
-                           (selectedCategory === 'ingress' && ['nginx-ingress'].includes(chart.name)) ||
-                           (selectedCategory === 'gitops' && (chart.name.toLowerCase().includes('argo') || chart.name.toLowerCase().includes('argocd')));
+                           (selectedCategory === 'databases' && (['redis', 'mongodb', 'postgresql', 'opensearch'].includes(chart.name))) ||
+                           (selectedCategory === 'messaging' && (['kafka'].includes(chart.name))) ||
+                           (selectedCategory === 'analytics' && (['pinot', 'airflow', 'superset'].includes(chart.name))) ||
+                           (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name))) ||
+                           (selectedCategory === 'ingress' && (['nginx-ingress'].includes(chart.name))) ||
+                           (selectedCategory === 'gitops' && (['argo-cd'].includes(chart.name))) ||
+                           (selectedCategory === 'storage' && (['minio'].includes(chart.name)));
                            
     return matchesSearch && matchesCategory;
   });
