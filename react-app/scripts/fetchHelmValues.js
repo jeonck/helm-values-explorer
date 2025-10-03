@@ -185,26 +185,42 @@ async function createDataJson(chartsData) {
   try {
     const dataDir = path.join(__dirname, '..', 'data');
     const publicDataDir = path.join(__dirname, '..', 'public', 'data');
+    const chartsDataDir = path.join(dataDir, 'charts');
+    const publicChartsDataDir = path.join(publicDataDir, 'charts');
     
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
-    }
-    
-    if (!fs.existsSync(publicDataDir)) {
-      fs.mkdirSync(publicDataDir, { recursive: true });
-    }
+    // Create directories if they don't exist
+    [dataDir, publicDataDir, chartsDataDir, publicChartsDataDir].forEach(dir => {
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+    });
 
-    // Write all chart data to a single JSON file
-    const dataFilePath = path.join(dataDir, 'charts.json');
-    const publicDataFilePath = path.join(publicDataDir, 'charts.json');
+    // Create individual chart files
+    const chartFiles = [];
+    for (const chart of chartsData) {
+      const fileName = `${chart.name}.json`;
+      chartFiles.push(fileName);
+      
+      // Write individual chart file to both data directories
+      const chartFilePath = path.join(chartsDataDir, fileName);
+      const publicChartFilePath = path.join(publicChartsDataDir, fileName);
+      
+      fs.writeFileSync(chartFilePath, JSON.stringify(chart, null, 2));
+      fs.writeFileSync(publicChartFilePath, JSON.stringify(chart, null, 2));
+    }
     
-    fs.writeFileSync(dataFilePath, JSON.stringify(chartsData, null, 2));
-    fs.writeFileSync(publicDataFilePath, JSON.stringify(chartsData, null, 2));
+    // Create index files listing all chart files
+    const indexFilePath = path.join(chartsDataDir, 'index.json');
+    const publicIndexFilePath = path.join(publicChartsDataDir, 'index.json');
     
-    console.log(`Data JSON file created at ${dataFilePath}`);
-    console.log(`Public data JSON file created at ${publicDataFilePath}`);
+    fs.writeFileSync(indexFilePath, JSON.stringify(chartFiles, null, 2));
+    fs.writeFileSync(publicIndexFilePath, JSON.stringify(chartFiles, null, 2));
+    
+    console.log(`Individual chart files created in ${chartsDataDir}`);
+    console.log(`Public chart files created in ${publicChartsDataDir}`);
+    console.log(`Index files created at ${indexFilePath} and ${publicIndexFilePath}`);
   } catch (error) {
-    console.error('Error creating data JSON file:', error.message);
+    console.error('Error creating chart files:', error.message);
   }
 }
 

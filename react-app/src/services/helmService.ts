@@ -6,13 +6,29 @@ import { parse } from 'yaml';
 export class HelmService {
   static async searchCharts(searchTerm: string = ''): Promise<HelmChart[]> {
     try {
-      // Fetch the chart data from the generated JSON file
-      // Using relative path to work with GitHub Pages deployment
-      const response = await fetch('./data/charts.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Try to fetch the chart index to get list of chart files
+      const indexResponse = await fetch('./data/charts/index.json');
+      if (!indexResponse.ok) {
+        throw new Error(`HTTP error! status: ${indexResponse.status}`);
       }
-      const charts: HelmChart[] = await response.json();
+      const chartFiles: string[] = await indexResponse.json();
+      
+      // Fetch all chart data
+      const chartPromises = chartFiles.map(async (fileName) => {
+        try {
+          const response = await fetch(`./data/charts/${fileName}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        } catch (error) {
+          console.error(`Error fetching chart file ${fileName}:`, error);
+          return null;
+        }
+      });
+      
+      const chartResults = await Promise.all(chartPromises);
+      const charts: HelmChart[] = chartResults.filter(chart => chart !== null);
       
       if (!searchTerm) return charts;
       
@@ -29,15 +45,32 @@ export class HelmService {
 
   static async getChartByName(repo: string, name: string): Promise<HelmChart | null> {
     try {
-      // Fetch the chart data from the generated JSON file
-      // Using relative path to work with GitHub Pages deployment
-      const response = await fetch('./data/charts.json');
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      // Try to fetch the chart index to get list of chart files
+      const indexResponse = await fetch('./data/charts/index.json');
+      if (!indexResponse.ok) {
+        throw new Error(`HTTP error! status: ${indexResponse.status}`);
       }
-      const charts: HelmChart[] = await response.json();
+      const chartFiles: string[] = await indexResponse.json();
       
-      return charts.find(chart => chart.repo === repo && chart.name === name) || null;
+      // Look for the specific chart
+      for (const fileName of chartFiles) {
+        try {
+          const response = await fetch(`./data/charts/${fileName}`);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const chart: HelmChart = await response.json();
+          
+          if (chart.repo === repo && chart.name === name) {
+            return chart;
+          }
+        } catch (error) {
+          console.error(`Error fetching chart file ${fileName}:`, error);
+          continue;
+        }
+      }
+      
+      return null;
     } catch (error) {
       console.error('Error fetching chart:', error);
       return null;
