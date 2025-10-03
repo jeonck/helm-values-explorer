@@ -10,5 +10,6 @@
   "postgresql.json",
   "prometheus.json",
   "airflow.json",
-  "minio.json"
+  "minio.json",
+  "superset.json"
 ]
