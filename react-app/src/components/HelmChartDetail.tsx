@@ -131,8 +131,8 @@ export const HelmChartDetail: React.FC<HelmChartDetailProps> = ({ chart: propCha
         </div>
         
         <div className="bg-gray-800 rounded-lg overflow-hidden">
-          <pre className="text-gray-100 text-sm p-4 overflow-auto max-h-96 whitespace-pre overflow-x-auto text-left !text-left">
-            <code className="block text-left !text-left">{chart.values}</code>
+          <pre className="text-gray-100 text-sm p-4 overflow-auto max-h-96 whitespace-pre overflow-x-auto text-left">
+            <code className="text-left">{chart.values}</code>
           </pre>
         </div>
         
@@ -140,8 +140,8 @@ export const HelmChartDetail: React.FC<HelmChartDetailProps> = ({ chart: propCha
           <h4 className="text-md font-medium text-gray-900 mb-2">How to use</h4>
           <div className="bg-gray-50 p-4 rounded-lg">
             <p className="text-gray-700 mb-2">To use this values file in your Helm installation:</p>
-            <pre className="bg-gray-800 text-gray-100 p-3 rounded text-sm font-mono overflow-x-auto whitespace-pre text-left !text-left">
-              <code className="block text-left !text-left">
+            <pre className="bg-gray-800 text-gray-100 p-3 rounded text-sm font-mono overflow-x-auto whitespace-pre text-left">
+              <code className="text-left">
                 {`# Add the repository
 helm repo add ${chart.repo} https://charts.${chart.repo.replace('-', '.')}.io
 helm repo update
