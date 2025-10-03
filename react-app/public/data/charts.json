@@ -1,5 +1,15 @@
 [
   {
+    "name": "fluentd",
+    "repo": "fluent",
+    "description": "Fluentd is an open source data collector for unified logging layer, designed to efficiently collect, filter, and forward log data from various sources.",
+    "version": "0.4.6",
+    "appVersion": "1.16.3",
+    "values": "# Fluentd configuration\n# Ref: https://github.com/fluent/helm-charts/blob/main/charts/fluentd/values.yaml\n\n## Global settings\nglobal:\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n\n## Fluentd settings\nfluentd:\n  ## Image settings\n  image:\n    repository: fluent/fluentd\n    tag: \"v1.16.3-1.0\"\n    pullPolicy: IfNotPresent\n  \n  ## Number of replicas\n  replicas: 1\n  \n  ## Resources settings\n  resources:\n    limits:\n      cpu: 500m\n      memory: 512Mi\n    requests:\n      cpu: 250m\n      memory: 256Mi\n  \n  ## Configuration for Fluentd\n  configMaps:\n    # Main Fluentd configuration\n    fluentd.conf: |\n      <source>\n        @type forward\n        port 24224\n        bind 0.0.0.0\n      </source>\n      \n      <match **>\n        @type stdout\n      </match>\n  \n  ## Persistence settings\n  persistence:\n    enabled: false\n    size: 10Gi\n    storageClass: \"\"\n  \n  ## Service settings\n  service:\n    type: ClusterIP\n    port: 24224\n    targetPort: 24224\n    annotations: {}\n  \n  ## ServiceAccount settings\n  serviceAccount:\n    create: true\n    name: \"\"\n\n## Metrics settings\nmetrics:\n  enabled: false\n  serviceMonitor:\n    enabled: false\n  prometheusRule: \n    enabled: false\n\n## Buffer settings\nbuffer:\n  # Size of the buffer chunk\n  chunkLimitSize: \"8MB\"\n  # Total buffer size limit\n  totalLimitSize: \"256MB\"\n  # Chunk limit records\n  chunkLimitRecords: 65536\n\n## Logging settings\nlogging:\n  level: \"info\"\n",
+    "url": "https://github.com/fluent/helm-charts/tree/main/charts/fluentd",
+    "createdAt": "2025-10-03"
+  },
+  {
     "name": "opensearch",
     "repo": "opensearch",
     "description": "OpenSearch is a distributed search and analytics engine based on Apache Lucene. It provides a RESTful multi-tenant database with a HTTP web interface and schema-free JSON documents.",

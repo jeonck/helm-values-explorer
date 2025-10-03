@@ -50,7 +50,7 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
                            (selectedCategory === 'databases' && (['redis', 'mongodb', 'postgresql', 'opensearch'].includes(chart.name) || chart.name.toLowerCase().includes('opensearch'))) ||
                            (selectedCategory === 'messaging' && (['kafka'].includes(chart.name) || chart.name.toLowerCase().includes('kafka'))) ||
                            (selectedCategory === 'analytics' && (['pinot'].includes(chart.name) || chart.name.toLowerCase().includes('pinot'))) ||
-                           (selectedCategory === 'monitoring' && ['prometheus'].includes(chart.name)) ||
+                           (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name) || chart.name.toLowerCase().includes('fluentd'))) ||
                            (selectedCategory === 'ingress' && ['nginx-ingress'].includes(chart.name)) ||
                            (selectedCategory === 'gitops' && (chart.name.toLowerCase().includes('argo') || chart.name.toLowerCase().includes('argocd')));
                            
