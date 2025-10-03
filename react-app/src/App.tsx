@@ -46,14 +46,14 @@ function App() {
       </header>
       <main className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-6">
-          <div className="lg:w-1/3">
+          <div className="w-full lg:w-1/3">
             <HelmChartList 
               onSelectChart={setSelectedChart} 
               isLoading={false}
               selectedChart={selectedChart}
             />
           </div>
-          <div className="lg:w-2/3">
+          <div className="w-full lg:w-2/3">
             <HelmChartDetail chart={selectedChart} isLoading={false} />
           </div>
         </div>

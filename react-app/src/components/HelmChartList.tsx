@@ -117,9 +117,9 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
                     {chart.version}
                   </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-1">{chart.description}</p>
+                <p className="text-sm text-gray-600 mt-1 line-clamp-2">{chart.description}</p>
                 <div className="flex justify-between items-center mt-2">
-                  <span className="text-xs text-gray-500">{chart.repo}</span>
+                  <span className="text-xs text-gray-500 truncate max-w-[50%]">{chart.repo}</span>
                   <span className="text-xs text-gray-500">{chart.appVersion}</span>
                 </div>
               </div>
