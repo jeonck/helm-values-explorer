@@ -152,6 +152,9 @@ helm install my-release ${chart.repo}/${chart.name}
 # Install with custom values
 helm install my-release -f values.yaml ${chart.repo}/${chart.name}
 
+# Common command used in practice for upgrades
+helm upgrade my-release ${chart.repo}/${chart.name} -f values.yaml --install --namespace my-namespace --create-namespace
+
 # Or download and inspect the chart first
 helm show chart ${chart.repo}/${chart.name}
 helm pull ${chart.repo}/${chart.name} --untar
