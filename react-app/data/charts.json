@@ -1,5 +1,15 @@
 [
   {
+    "name": "kafka",
+    "repo": "bitnami",
+    "description": "Apache Kafka is a distributed streaming platform designed to build real-time pipelines and can be used as a message broker or as a replacement for a shared database.",
+    "version": "28.0.3",
+    "appVersion": "3.8.0",
+    "values": "# Kafka configuration\n# Ref: https://github.com/bitnami/charts/blob/main/bitnami/kafka/values.yaml\n\n## Global settings\nglobal:\n  imageRegistry: \"\"\n  imagePullSecrets: []\n  storageClass: \"\"\n\n## Kafka configuration\nkafka:\n  ## Authentication in Kafka\n  auth:\n    clientProtocol: plain  # Possible values: plain, tls, mtls, sasl, oauthbearer\n    interBrokerProtocol: plain\n    \n  ## Authorization in Kafka\n  authorization:\n    type: none  # Possible values: none, simple\n    \n  ## Kafka deployment configuration\n  replicaCount: 3\n  \n  ## Kafka listeners configuration\n  listeners:\n    client:\n      name: CLIENT\n      port: 9092\n      protocol: PLAINTEXT\n    external:\n      name: EXTERNAL\n      port: 9094\n      protocol: PLAINTEXT\n      type: loadBalancer\n  \n  ## Persistence configuration\n  persistence:\n    enabled: true\n    size: 8Gi\n    storageClass: \"\"\n  \n  ## Resources configuration\n  resources:\n    limits:\n      cpu: 500m\n      memory: 1Gi\n    requests:\n      cpu: 250m\n      memory: 512Mi\n  \n  ## JVM configuration\n  heapOpts: \"-Xmx1024m -Xms1024m\"\n\n## Zookeeper settings\nzookeeper:\n  enabled: true\n  replicaCount: 3\n  \n  persistence:\n    enabled: true\n    size: 8Gi\n    storageClass: \"\"\n  \n  resources:\n    limits:\n      cpu: 500m\n      memory: 512Mi\n    requests:\n      cpu: 250m\n      memory: 256Mi\n  \n  heapSize: 256\n\n## Metrics configuration\nmetrics:\n  kafka:\n    enabled: false\n    \n  zookeeper:\n    enabled: false\n    \n  jmx:\n    enabled: false\n",
+    "url": "https://github.com/bitnami/charts/tree/main/bitnami/kafka",
+    "createdAt": "2025-10-03"
+  },
+  {
     "name": "argo-cd",
     "repo": "argo",
     "description": "Declarative, GitOps continuous delivery tool for Kubernetes",
