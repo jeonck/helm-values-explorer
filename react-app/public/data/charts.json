@@ -1,5 +1,15 @@
 [
   {
+    "name": "argo-cd",
+    "repo": "argo",
+    "description": "Declarative, GitOps continuous delivery tool for Kubernetes",
+    "version": "8.0.2",
+    "appVersion": "v3.1.8",
+    "values": "# ArgoCD configuration\n# Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argo-cd/values.yaml\n\n## ArgoCD configuration\n## Global settings\nglobal:\n  image:\n    registry: quay.io\n    repository: argoproj/argocd\n    tag: \"v3.1.8\"\n\n## Server configuration\nserver:\n  name: server\n  image: {}\n  replicas: 1\n  service:\n    type: ClusterIP\n    port: 8080\n    targetPort: 8080\n  ingress:\n    enabled: false\n\n## Redis configuration\nredis:\n  enabled: true\n  name: redis\n  image:\n    registry: public.ecr.aws\n    repository: docker/library/redis\n    tag: 7.2-alpine\n\n## Application controller configuration\napplicationSet:\n  enabled: true\n  image:\n    registry: quay.io\n    repository: argoproj/applicationset\n    tag: \"v1.13.0\"\n\ndex:\n  enabled: true\n  name: dex-server\n  image:\n    registry: ghcr.io\n    repository: dexidp/dex\n    tag: \"v2.40.0\"\n\nconfigs:\n  # Admin user initial password\n  secret:\n    createSecret: true\n    # argocdServerAdminPassword: \"\"\n    # argocdServerAdminPasswordMtime: \"\"\n",
+    "url": "https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd",
+    "createdAt": "2025-10-03"
+  },
+  {
     "name": "nginx-ingress",
     "repo": "ingress-nginx",
     "description": "Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer",
