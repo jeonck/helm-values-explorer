@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HelmChartList } from './components/HelmChartList';
 import { HelmChartDetail } from './components/HelmChartDetail';
 import type { HelmChart } from './types';
+import { HelmService } from './services/helmService';
 import './App.css';
 
 function App() {
   const [selectedChart, setSelectedChart] = useState<HelmChart | null>(null);
+
+  // Set default chart to nginx-ingress if no chart is selected
+  useEffect(() => {
+    const setDefaultChart = async () => {
+      if (!selectedChart) {
+        const nginxChart = await HelmService.getChartByName('ingress-nginx', 'nginx-ingress');
+        if (nginxChart) {
+          setSelectedChart(nginxChart);
+        }
+      }
+    };
+    
+    setDefaultChart();
+  }, [selectedChart]);
 
   return (
     <div className="min-h-screen bg-gray-50">
