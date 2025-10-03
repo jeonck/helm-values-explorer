@@ -8,5 +8,6 @@
   "redis.json",
   "mongodb.json",
   "postgresql.json",
-  "prometheus.json"
+  "prometheus.json",
+  "airflow.json"
 ]

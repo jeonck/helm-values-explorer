@@ -30,7 +30,8 @@ const CHARTS_TO_FETCH = [
   { name: 'redis', repo: 'bitnami' },
   { name: 'mongodb', repo: 'bitnami' },
   { name: 'postgresql', repo: 'bitnami' },
-  { name: 'prometheus', repo: 'prometheus-community' }
+  { name: 'prometheus', repo: 'prometheus-community' },
+  { name: 'airflow', repo: 'apache' }
 ];
 
 async function fetchIndexYaml(repoName, repoUrl) {
