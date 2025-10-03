@@ -7,6 +7,7 @@ const categories: HelmChartCategory[] = [
   { id: 'databases', name: 'Databases', description: 'Database Helm charts' },
   { id: 'monitoring', name: 'Monitoring', description: 'Monitoring and observability tools' },
   { id: 'ingress', name: 'Ingress Controllers', description: 'Ingress and load balancing solutions' },
+  { id: 'gitops', name: 'GitOps Tools', description: 'GitOps and continuous delivery tools' },
   { id: 'security', name: 'Security', description: 'Security-related solutions' },
 ];
 
@@ -46,7 +47,8 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
     const matchesCategory = selectedCategory === 'all' || 
                            (selectedCategory === 'databases' && ['redis', 'mongodb', 'postgresql'].includes(chart.name)) ||
                            (selectedCategory === 'monitoring' && ['prometheus'].includes(chart.name)) ||
-                           (selectedCategory === 'ingress' && ['nginx-ingress'].includes(chart.name));
+                           (selectedCategory === 'ingress' && ['nginx-ingress'].includes(chart.name)) ||
+                           (selectedCategory === 'gitops' && ['argo-cd'].includes(chart.name));
                            
     return matchesSearch && matchesCategory;
   });

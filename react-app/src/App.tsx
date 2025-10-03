@@ -12,9 +12,15 @@ function App() {
   useEffect(() => {
     const setDefaultChart = async () => {
       if (!selectedChart) {
-        const nginxChart = await HelmService.getChartByName('ingress-nginx', 'nginx-ingress');
-        if (nginxChart) {
-          setSelectedChart(nginxChart);
+        // First try to get nginx-ingress
+        let defaultChart = await HelmService.getChartByName('ingress-nginx', 'nginx-ingress');
+        if (!defaultChart) {
+          // If nginx-ingress not found, try argo-cd
+          defaultChart = await HelmService.getChartByName('argo', 'argo-cd');
+        }
+        
+        if (defaultChart) {
+          setSelectedChart(defaultChart);
         }
       }
     };
