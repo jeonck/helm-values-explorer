@@ -8,7 +8,7 @@ import './App.css';
 function App() {
   const [selectedChart, setSelectedChart] = useState<HelmChart | null>(null);
 
-  // Set default chart to nginx-ingress if no chart is selected
+  // Set default chart if no chart is selected
   useEffect(() => {
     const setDefaultChart = async () => {
       if (!selectedChart) {
@@ -17,6 +17,14 @@ function App() {
         if (!defaultChart) {
           // If nginx-ingress not found, try argo-cd
           defaultChart = await HelmService.getChartByName('argo', 'argo-cd');
+        }
+        
+        if (!defaultChart) {
+          // If neither found, get the first available chart
+          const allCharts = await HelmService.searchCharts();
+          if (allCharts.length > 0) {
+            defaultChart = allCharts[0];
+          }
         }
         
         if (defaultChart) {
