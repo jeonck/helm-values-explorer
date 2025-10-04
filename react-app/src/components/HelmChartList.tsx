@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import type { HelmChart, HelmChartCategory } from '../types';
 import { HelmService } from '../services/helmService';
 
@@ -44,21 +44,24 @@ export const HelmChartList: React.FC<HelmChartListProps> = ({
     fetchCharts();
   }, []);
 
-  const filteredCharts = charts.filter(chart => {
-    const matchesSearch = chart.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          chart.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === 'all' || 
-                           (selectedCategory === 'databases' && (['redis', 'mongodb', 'postgresql'].includes(chart.name))) ||
-                           (selectedCategory === 'messaging' && (['kafka'].includes(chart.name))) ||
-                           (selectedCategory === 'olap' && (['opensearch', 'pinot'].includes(chart.name))) ||
-                           (selectedCategory === 'analytics' && (['airflow', 'superset', 'opensearch-dashboards'].includes(chart.name))) ||
-                           (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name))) ||
-                           (selectedCategory === 'ingress' && (['nginx-ingress'].includes(chart.name))) ||
-                           (selectedCategory === 'gitops' && (['argo-cd'].includes(chart.name))) ||
-                           (selectedCategory === 'storage' && (['minio', 'rook-ceph'].includes(chart.name)));
-                           
-    return matchesSearch && matchesCategory;
-  });
+  const filteredCharts = useMemo(() => {
+    return charts.filter(chart => {
+      const matchesSearch = !searchTerm || 
+                            chart.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                            chart.description.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesCategory = selectedCategory === 'all' || 
+                             (selectedCategory === 'databases' && (['redis', 'mongodb', 'postgresql'].includes(chart.name))) ||
+                             (selectedCategory === 'messaging' && (['kafka'].includes(chart.name))) ||
+                             (selectedCategory === 'olap' && (['opensearch', 'pinot'].includes(chart.name))) ||
+                             (selectedCategory === 'analytics' && (['airflow', 'superset', 'opensearch-dashboards'].includes(chart.name))) ||
+                             (selectedCategory === 'monitoring' && (['prometheus', 'fluentd'].includes(chart.name))) ||
+                             (selectedCategory === 'ingress' && (['nginx-ingress'].includes(chart.name))) ||
+                             (selectedCategory === 'gitops' && (['argo-cd'].includes(chart.name))) ||
+                             (selectedCategory === 'storage' && (['minio', 'rook-ceph'].includes(chart.name)));
+                             
+      return matchesSearch && matchesCategory;
+    });
+  }, [charts, searchTerm, selectedCategory]);
 
   return (
     <div className="bg-white rounded-lg shadow p-4 h-full">
